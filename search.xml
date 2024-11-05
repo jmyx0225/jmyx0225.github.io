@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>CentOS配置本地源</title>
+      <link href="/2024/11/05/%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90/"/>
+      <url>/2024/11/05/%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90/</url>
+      
+        <content type="html"><![CDATA[<p>清除原有源<br>yum clean all<br>找到挂载的驱动器<br>df -h<br>创建挂载点<br>mkdir /mnt/iso<br>挂载<br>mount /dev/sr0 /mnt/iso<br>备份原有 <code>yum</code> 源文件<br>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak<br>创建本地仓库文件vi /etc/yum.repos.d/local.repo</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[<span class="built_in">local</span>]</span><br><span class="line">name=Local Repository</span><br><span class="line">baseurl=file:///mnt/iso</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure><p>sudo yum clean all<br>sudo yum makecache<br>sudo yum update</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CentOS修改用户名和密码</title>
       <link href="/2024/04/09/CentOS%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81/"/>
       <url>/2024/04/09/CentOS%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81/</url>
