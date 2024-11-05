@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>通过vCenter命令行加域</title>
+      <link href="/2024/11/05/%E9%80%9A%E8%BF%87vCenter%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8A%A0%E5%9F%9F/"/>
+      <url>/2024/11/05/%E9%80%9A%E8%BF%87vCenter%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8A%A0%E5%9F%9F/</url>
+      
+        <content type="html"><![CDATA[<p>检查DNS解析是否正确：  <code>nslookup &lt;domain-controller-name&gt;</code></p><p>检查当前的域状态:  <code>/opt/likewise/bin/domainjoin-cli query</code></p><p>退出域  :<code>/opt/likewise/bin/domainjoin-cli leave</code></p><p>加域：<code>/opt/likewise/bin/domainjoin-cli join &lt;domain-name&gt; &lt;domain-admin-user&gt;</code></p><p>检查当前DNS设置：  <code>cat /etc/resolv.conf</code></p><p>测试DNS解析：<code>nslookup &lt;domain-controller-name&gt;</code>  </p><p>更改DNS服务器 ：<code>vi /etc/resolv.conf``nameserver &lt;dns-server-ip&gt;</code></p><p>检查并同步时间 :<code>timedatectl</code></p><p>手动同步时间：<code>ntpdate &lt;ntp-server-ip&gt;</code>  </p><p>配置NTP服务：<code>vi /etc/ntp.conf</code>  </p><p> 添加或修改NTP服务器地址：  <code>server &lt;ntp-server-ip&gt;</code></p><p> 重启NTP服务：  <code>systemctl restart ntpd</code></p><p>重启服务命令：<code>service-control --stop --all</code>  <code>service-control --start --all</code></p><p>通过SSH登录 :<code>ssh root@&lt;vcenter-ip&gt;</code></p><p>检查当前主机名：<code>hostnamectl</code>  </p><p>设置主机名 :<code>hostnamectl set-hostname</code></p><p> 确保主机名解析正确 :</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CentOS配置本地源</title>
       <link href="/2024/11/05/%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90/"/>
       <url>/2024/11/05/%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90/</url>
